@@ -42,7 +42,7 @@ def get_matrix() -> np.ndarray:
 
 if __name__ == "__main__":
     X = get_matrix()
-    url = "http://127.0.0.1:8000/infer"
+    url = "http://127.0.0.1:8080/infer"
     print(f"Streaming {len(X)} records → {url}")
     for row in X:
         payload = {"values": [float(v) for v in row.tolist()]}

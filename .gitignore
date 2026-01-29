@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Packet captures (too large / sensitive)
+data/*.pcap
+data/*.pcapng
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Virtual environments
+env/
+venv/

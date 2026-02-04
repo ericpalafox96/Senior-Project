@@ -2,10 +2,19 @@ from scapy.all import rdpcap, TCP, Raw
 import pandas as pd
 import numpy as np
 import hashlib
+import argparse
 
-PCAP_FILE = "data/replay_attack.pcapng"
-WINDOW_SIZE = 0.2
-LABEL = "replay_attack"
+parser = argparse.ArgumentParser()
+parser.add_argument("--pcap", required=True)
+parser.add_argument("--window", type=float, default=0.5)
+parser.add_argument("--label", required=True)
+parser.add_argument("--out", required=True)
+args = parser.parse_args()
+
+PCAP_FILE = args.pcap
+WINDOW_SIZE = args.window
+LABEL = args.label
+OUT_FILE = args.out
 
 packets = rdpcap(PCAP_FILE)
 
@@ -77,6 +86,5 @@ while current < end_time:
     current += WINDOW_SIZE
 
 df = pd.DataFrame(rows)
-out_file = f"features_{LABEL}.csv"
-df.to_csv(out_file, index=False)
-print("Saved:", out_file)
+df.to_csv(OUT_FILE, index=False)
+print("Saved:", OUT_FILE)

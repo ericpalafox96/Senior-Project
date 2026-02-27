@@ -2,15 +2,22 @@
 __pycache__/
 *.pyc
 
-# Packet captures (too large / sensitive)
-data/*.pcap
-data/*.pcapng
+# Packet captures (large / sensitive)
+data/pcaps/
+*.pcap
+*.pcapng
+
+# Saved models (optional: ignore if you don't want .pkl in repo)
+data/models/
+*.pkl
 
 # OS / editor
 .DS_Store
+Thumbs.db
 .vscode/
 .idea/
 
 # Virtual environments
 env/
 venv/
+.venv/

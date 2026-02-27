@@ -9,9 +9,9 @@ import os
 
 # Files expected in repo root
 FILES = [
-    "features_normal.csv",
-    "features_timing_attack.csv",
-    "features_replay_attack.csv"
+    "data/features/features_normal.csv",
+    "data/features/features_timing_attack.csv",
+    "data/features/features_replay_attack.csv"
 ]
 
 # load & concat
@@ -43,7 +43,7 @@ print("\nFeature importances (top):")
 print(fi.head(20).to_string(index=False))
 
 # save csv
-fi.to_csv("feature_importances.csv", index=False)
+fi.to_csv("/data/features/feature_importances.csv", index=False)
 print("\nSaved feature_importances.csv")
 
 # plot and save figure

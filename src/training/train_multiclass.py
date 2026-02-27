@@ -4,10 +4,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 
 # Load datasets
-df_normal = pd.read_csv("features_normal.csv")
-df_timing = pd.read_csv("features_timing_attack.csv")
-df_replay = pd.read_csv("features_replay_attack.csv")
-df_command = pd.read_csv("features_command_injection.csv")
+df_normal = pd.read_csv("data/features/features_normal.csv")
+df_timing = pd.read_csv("data/features/features_timing_attack.csv")
+df_replay = pd.read_csv("data/features/features_replay_attack.csv")
+df_command = pd.read_csv("data/features/features_command_injection.csv")
 
 # Combine
 df = pd.concat([df_normal, df_timing, df_replay, df_command], ignore_index=True)
@@ -30,6 +30,14 @@ model = RandomForestClassifier(
     random_state=42
 )
 model.fit(X_train, y_train)
+
+import pickle
+# model is the trained RandomForestClassifier
+with open("data/models/rf_4class.pkl", "wb") as f:
+    pickle.dump(model, f)
+
+print("Saved model: data/models/rf_4class.pkl")
+print("Feature columns:", list(X.columns))
 
 importances = model.feature_importances_
 for name, val in sorted(zip(X.columns, importances), key=lambda x: -x[1]):

@@ -7,9 +7,10 @@ from sklearn.metrics import accuracy_score, f1_score
 WINDOWS = [0.1, 0.2, 0.5]
 
 PCAPS = {
-    "normal": "data/normal.pcapng",
-    "timing_attack": "data/timing_attack.pcapng",
-    "replay_attack": "data/replay_attack.pcapng",
+    "normal": "data/pcaps/normal.pcapng",
+    "timing_attack": "data/pcaps/timing_attack.pcapng",
+    "replay_attack": "data/pcaps/replay_attack.pcapng",
+    "command_injection": "data/pcaps/command_injection.pcapng",
 }
 
 results = []
@@ -19,9 +20,9 @@ for w in WINDOWS:
 
     # Regenerate features for each class
     for label, pcap in PCAPS.items():
-        out_csv = f"features_{label}_w{w}.csv"
+        out_csv = f"data/features/features_{label}_w{w}.csv"
         cmd = [
-            "python", "pcap_to_features.py",
+            "python", "src/features/pcap_to_features.py",
             "--pcap", pcap,
             "--window", str(w),
             "--label", label,
@@ -31,9 +32,10 @@ for w in WINDOWS:
 
     # Load features and train model
     df = pd.concat([
-        pd.read_csv(f"features_normal_w{w}.csv"),
-        pd.read_csv(f"features_timing_attack_w{w}.csv"),
-        pd.read_csv(f"features_replay_attack_w{w}.csv"),
+        pd.read_csv(f"data/features/features_normal_w{w}.csv"),
+        pd.read_csv(f"data/features/features_timing_attack_w{w}.csv"),
+        pd.read_csv(f"data/features/features_replay_attack_w{w}.csv"),
+        pd.read_csv(f"data/features/features_command_injection_w{w}.csv"),
     ], ignore_index=True)
 
     X = df.drop(columns=["label"])
@@ -60,7 +62,7 @@ for w in WINDOWS:
     print(f"accuracy={acc:.4f}  macro_f1={macro_f1:.4f}")
 
 out = pd.DataFrame(results)
-out.to_csv("window_sweep_results.csv", index=False)
+out.to_csv("data/features/window_sweep_results.csv", index=False)
 
 print("\nSaved window_sweep_results.csv")
 print(out.to_string(index=False))

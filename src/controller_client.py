@@ -2,7 +2,7 @@ from pymodbus.client import ModbusTcpClient
 import time
 import random
 
-DER_IP = "172.17.201.90"   # مثال: "192.168.1.23"
+DER_IP = "192.168.50.20"   # مثال: "192.168.1.23"
 PORT = 502
 
 client = ModbusTcpClient(DER_IP, port=PORT)

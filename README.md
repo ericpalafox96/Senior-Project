@@ -23,7 +23,7 @@ All traffic must pass through the Jetson BITW device before reaching the DER.
 
 ---
 ## High-Level Architecture
-
+```
 Laptop A (Controller / Attacker)
 |
 Ethernet
@@ -33,7 +33,7 @@ Jetson Orin Nano (br0 bridge)
 Ethernet
 |
 Laptop B (DER / PLC Simulator)
-
+```
 The Jetson performs:
 
 - Transparent packet forwarding
@@ -43,7 +43,7 @@ The Jetson performs:
 
 ---
 ## Repository Structure
-
+```
 src/
 ├── features/ # PCAP → feature extraction and window sweep
 ├── training/ # Model training, evaluation, feature importance
@@ -56,6 +56,7 @@ data/
 
 docs/
 └── diagrams/ # Architecture and report diagrams
+```
 
 Notes:
 - PCAP files are intentionally excluded from GitHub due to size limits.
@@ -175,6 +176,7 @@ sudo tcpdump -i br0 port 502
 ```
 All traffic must pass through br0
 
+---
 ## Real-Time IDS Operation
 
 The runtime phase performs:
@@ -203,3 +205,5 @@ Notes:
 - Wi-Fi should be disabled during BITW testing to prevent routing around the bridge.
 - PCAP files are excluded from version control due to GitHub size limits.
 - The trained model can be regenerated at any time using the training scripts.
+
+---

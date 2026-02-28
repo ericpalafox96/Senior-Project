@@ -89,9 +89,11 @@ On Jetson Orin Nano:
 - Linux bridge configured as br0
 
 Install required packages:
-- sudo apt update
-- sudo apt install python3-pip
-- pip3 install -r requirements.txt
+```
+sudo apt update
+sudo apt install python3-pip
+pip3 install -r requirements.txt
+```
 
 Required Python Libraries:
 - numpy
@@ -114,8 +116,9 @@ Using Wireshark, capture traffic for each scenario and save locally:
 - `command_injection.pcapng`
 
 Place PCAP files in:
-    - data/pcaps/
-
+```
+data/pcaps/
+```
 ---
 ### 2️⃣ Convert PCAP to Feature Windows
 
